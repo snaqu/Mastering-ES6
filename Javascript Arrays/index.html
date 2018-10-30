@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array methodes</title>
+    <style>
+        .color {
+            color: pink;
+            font-size: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="music">
+
+        </div>
+        <ul id="list">
+
+        </ul>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // pop - usuwa ostatni element z talbicy
+            // push - dodaje element na ostatnie miejsce talibcy
+            const numbers = [1, 2, 3, 4, 5];
+            numbers.pop();
+            numbers.push("miklas");
+            console.log(numbers);
+
+            // shift - usuwa element z perwszego miejsca tablicy
+            // unsight - dodaje element na pierwsze miejsce tablicy
+            const dogs = ['lablador', 'dog', 'pudel'];
+            dogs.shift();
+            dogs.unshift("beagle");
+            console.log(dogs);
+
+            // concat - łączy dwie tablice razem
+            // join - łączy tablice w jeden string a wszystkie elementy spaja spójnikiem jakim zadeklarujemy
+            const main = document.querySelector('.music');
+            const music = ['hip-hop', 'rock', 'jazz'];
+            const newMusic = ['rnb', 'metal'];
+            const allMusic = [].concat(music, newMusic);
+            main.innerHTML = allMusic.join(", ");
+            console.log(allMusic);
+
+            // slice - powyżej podanego indexu bierze wartości z tablicy do jej końca (domyslna wartoscia jest ostatni element tablicy)
+            //         nie modyfikuje obecnej tablicy - zwraca jako nowa tablica
+            const myNumbers = [1, 2, 3, 4, 5, 7, 8];
+            const newNumbers = myNumbers.slice(3, 5); //[4, 5]
+            const newNumbers2 = myNumbers.slice(5); //[7,8]
+            console.log(newNumbers2);
+
+            // splice - od podanego indexu wszystko w górę zostaje usunięte (tablica zostaje zmodyfikowana)
+            const hisNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            hisNumbers.splice(5); // [1,2,3,4,5]
+            hisNumbers.splice(3, 4); // [1,2,3,8,9] -- 1 argument to index od którego zaczynam, 2 argument to liczba elementów do usunięcia
+            hisNumbers.splice(2, 0, ...['p', 'a', 'w', 'e', 'l']); // ... - spłaszczają tablice. taki zapis pozwala dodać po 2 indexie dane do tablicy
+            console.log(hisNumbers);
+
+            // forEach - wykonuje dana funkcję dla każdego elelemntu tablicy
+            const list = document.querySelector("#list");
+            const peoples = ['Jarek', 'Tomasz', 'Kinga', 'Andrzej', 'Katarzyna'];
+            peoples.unshift('Damian');
+            peoples.forEach((people) => {
+                const li = document.createElement('li');
+                li.innerHTML = people;
+                list.appendChild(li);
+            })
+
+            const liElements = document.querySelectorAll("li");
+            liElements.forEach(element => {
+                element.addEventListener("click", (e) => {
+                    liElements.forEach(element => {
+                        element.classList.remove('color');
+                    })
+                    e.target.classList.add('color');
+                })
+            })
+            // ---------------------------------------------------------
+            const shoppingList = [
+                {
+                    name: 'carrot',
+                    price: 21.10,
+                    category: 'food',
+                    quantity: 1,
+                }, {
+                    name: 'cheese',
+                    price: 10.15,
+                    category: 'food',
+                    quantity: 0,
+                }, {
+                    name: 'Shampoo',
+                    price: 9.20,
+                    category: 'cosmetic',
+                    quantity: 0,
+                }, {
+                    name: 'toothpaste',
+                    price: 18.40,
+                    category: 'cosmetic',
+                    quantity: 1,
+                }, {
+                    name: 'usb stick',
+                    price: 5.40,
+                    category: 'Other',
+                    quantity: 1,
+                },
+            ];
+
+            // filter - zwraca nową tablice z przefiltrowana tablica w taki sposób jaki określiłem
+            const foodItems = shoppingList.filter(item => item.category === 'food');
+            console.log(foodItems);
+
+            // find - wypluwa pierwszy element który spałenia warunek
+            // toLowerCase - zastosowane po to aby wielkosc liter była zgodna
+            const getShampoo = shoppingList.find(item => item.name.toLowerCase() === 'shampoo');
+            console.log(getShampoo);
+
+            // map - działa podbonie jak forEach tylko w porównaniu do niego zwraca nową tablice
+            const listProducts = shoppingList.map(item => {
+                return `${item.name} | ${item.price} | ${item.category}`;
+            })
+            console.log(listProducts);
+
+            // reduce - dodaje wartosc do wartosci poprzed kolejne iteracje przez (acc)
+            const totalPice = shoppingList.reduce((acc, item) => {
+                return acc + item.price;
+            }, 0);
+            console.log(`Total price is $${totalPice.toFixed(2)}`);
+
+            // łączenie metod + zastosowanie destrukturyzacji
+            const priceOfCosmetics = shoppingList
+                .filter(({ category }) => category === "cosmetic")
+                .reduce((acc, { price }) => acc + price, 0);
+            console.log(`Price of cosmetics $${priceOfCosmetics.toFixed(2)}`);
+        })
+    </script>
+</body>
+
+</html>

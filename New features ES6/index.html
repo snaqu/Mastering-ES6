@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mastering ES6</title>
+</head>
+
+<body>
+    <script>
+
+        // 1. Domyślne wartości
+
+        function getName(name = 'Pawel') {
+            console.log(`My name is ${name}`);
+        }
+
+        getName();
+        getName("Andrzej");
+
+        // 2. Stringi
+
+        const myDog = 'lucky';
+        const text = `Lorem ipsum doloret set
+        ament coś tam elemele
+        dudki kolejna linia`;
+
+        console.log(`My dog is ${myDog}`);
+        console.log(text);
+
+        // 3. Destructuring
+
+        const myObejct = {
+            name: 'Pawel',
+            surname: 'Miklas',
+            age: 19,
+            job: 'front-end dev',
+        }
+
+        // wyciąganie do zmiennych
+        const { name } = myObejct;
+        console.log(name);
+
+        // wyciąganie do funkcji    - jak są zagnieżdżenia to wtedy ({ job, job: { programmer }}) dwa razy job jeżeli chce mieć dostęp do całego obiektu
+        function aboutMe({ name, age }) {
+            console.log(`My name is ${name} and i'm ${age} old`);
+        }
+        aboutMe(myObejct);
+
+        // destructuring tablic
+        const names = ['Paweł', 'Ewa', 'Katarzyna'];
+        const [first, second] = names; // zawsze wyciąga pierwszy element
+
+        // 4. ESM 
+
+        // Named export - changeNavbar as XD (zmienia nazwe tutaj)
+        // export const changeNavbar = '...';
+        import { changeNavbar } from './navbar.js';
+
+        // Default export - może być tylko jeden i nie uzywam wtedy wąsów, nazwa w tym pliku może inna
+        // export deafult fix;
+        import fix from './fixMenu.js';
+
+
+
+    </script>
+</body>
+
+</html>
