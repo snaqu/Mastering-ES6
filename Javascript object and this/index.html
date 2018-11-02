@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Objects and this</title>
+</head>
+
+<body>
+    <script>
+        // 1.
+        const prod1 = {
+            name: 'apples',
+            price: 14.20,
+            weight: 0.32
+        };
+        const prod2 = {
+            name: 'bananas',
+            price: 7.20,
+            weight: 0.12
+        };
+        const { name, price, weight } = prod1;
+        const { name: name2, price: price2, weight: weight2 } = prod2;
+        console.log(`Prod1 name: ${name}, Prod2 name: ${name2}`);
+        console.log(`Total price: ${price + price2}, Total weight: ${weight + weight2}`);
+
+        // 2.
+        const currentUser = {
+            name: 'Jack',
+            surname: 'Trump',
+            email: 'jacktrump@contact.com',
+            www: 'trump.com',
+            userType: 'human'
+        }
+
+        console.table(currentUser);
+
+        // 3.
+        const book = {
+            title: "human problems",
+            author: "donald tusk",
+            pageCount: "43",
+            publisher: "spkzoo"
+        }
+
+        const objectKeys = Object.keys(book); // return an array of keys
+        objectKeys.forEach((key, value) => `key: ${key}, value: ${value}`);
+        console.log(book);
+
+        // 4.
+        const users = [
+            //id name surname email age value
+            [1, "Shauna", "Bradnocke", "sbradnocke0@altervista.org", 20, 108.28],
+            [2, "Mela", "Redman", "mredman1@nps.gov", 24, 267.37],
+            [3, "Othelia", "Lemon", "olemon2@slashdot.org", 15, 748.06],
+            [4, "Meier", "Cockell", "mcockell3@icio.us", 32, 1951.64],
+            [5, "Shellysheldon", "Gronowe", "sgronowe4@cnbc.com", 16, 1040.54],
+            [6, "Francisca", "Tofanini", "ftofanini5@gnu.org", 21, 1544.08],
+            [7, "Cliff", "Underwood", "cunderwood6@addtoany.com", 10, 451.21],
+            [8, "Caron", "Falshaw", "cfalshaw7@hugedomains.com", 27, 1968.72],
+            [9, "Anitra", "Warters", "awarters8@intel.com", 12, 380.68],
+            [10, "Caitrin", "Baudrey", "cbaudrey9@ihg.com", 13, 1385.44]
+        ]
+
+        const newUsers = users.map(e => {
+            return {
+                id: e[0],
+                name: e[1],
+                surname: e[2],
+                email: e[3],
+                age: e[4],
+                money: e[5]
+            }
+
+        });
+        console.log(newUsers);
+
+        // 5.
+
+        let summary = {
+            money: null,
+            age: null,
+            averageAge: null
+        }
+
+        summary.money = newUsers.reduce((acc, { money }) => acc + money, 0);
+        summary.age = newUsers.reduce((acc, { age }) => acc + age, 0);
+        summary.averageAge = newUsers.reduce((acc, { age }) => acc + age, 0) / newUsers.length;
+        console.log(summary);
+    </script>
+</body>
+
+</html>
