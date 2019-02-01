@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>continued</title>
+</head>
+
+<body>
+    <script>
+        // 1.
+        function Car(name, brand, engine, mile, age) {
+            this.name = name;
+            this.brand = brand;
+            this.engine = engine;
+            this.mile = mile;
+            this.age = age;
+        }
+
+        const car1 = new Car("Corolla", "Toyota", 1.4, 240000, 15);
+        const car2 = new Car("Viper", "Dodge", 3.7, 89000, 4)
+        console.log(car1, car2);
+
+        // 2.
+        const Enemy = function (name, speed, attack, posX) {
+            this.name = name;
+            this.live = 5;
+            this.speed = speed;
+            this.attack = attack;
+            this.posX = posX;
+        }
+
+        Enemy.prototype.move = function () {
+            this.posX = this.posX - this.speed;
+            console.log(`Jestem ${this.name}, jestem na pozycji: ${this.posX}`);
+        }
+        Enemy.prototype.attackEnemy = function () {
+            console.log(`Atakuję gracza z pozycji ${this.posX}, z siłą ${this.attack}`);
+        }
+
+        Enemy.prototype.hit = function () {
+            this.live--;
+            console.log(`Mam teraz życia: ${this.live}`);
+        }
+
+        const player = new Enemy("Lolek", 20, 10, 250);
+        player.move();
+        player.move();
+        player.move();
+        player.attackEnemy();
+        const player2 = new Enemy("Mietek", 10, 15, 250);
+        player.move();
+        player.move();
+        player.move();
+        player2.attackEnemy();
+        player2.hit();
+        player2.hit();
+        player2.hit();
+
+    </script>
+</body>
+
+</html>
